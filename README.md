@@ -37,6 +37,21 @@ XQuartz website or via Homebrew:
 brew cask install xquartz
 ```
 
+Homebrew has removed the `gv` formula from their repository. To install `arb`
+on fresh system (which had `gv` not installed via Homebrew previously), another
+tab must be added to Homebrew.
+
+```bash
+brew tap denismm/gv
+```
+
+If the installation of arb fails after adding the tab, you might need to
+uninstall `ghostscript` before installing `arb`.
+
+```bash
+brew uninstall ghostscript
+```
+
 ## Install ARB
 
 The `arb` formula allows you to install three different versions of ARB on your
