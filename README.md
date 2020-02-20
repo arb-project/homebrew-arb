@@ -13,7 +13,7 @@ Open tasks
 - [ ] integration into the ARB release cycle, formula needs to be tagged, too
 - [ ] add formula for SINA
 - [ ] add SINA to ARB
-- [ ] fix [cosmetic PERL bug](http://bugs.arb-home.de/ticket/508)
+- [x] fix [cosmetic PERL bug](http://bugs.arb-home.de/ticket/508) - fixed in HEAD
 - [ ] repair OpenGL build
 
 ## Prerequisites
@@ -200,6 +200,9 @@ brew list --versions arb
 ```
 
 ## Perl support
+
+*This problem is fixed in the `HEAD` version. The next `DEVEL` version will
+also include the fix.*
 
 The versions created by this formula support all features of ARB which require
 perl scripts, e.g. `markSpecies.pl` or Import/Import fields from calc-sheet.
