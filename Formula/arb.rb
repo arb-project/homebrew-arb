@@ -121,7 +121,7 @@ class Arb < Formula
       system "make", "rebuild", "UNIT_TESTS=1", *args
     end
 
-    system "make", "all", *args
+    system "make", "rebuild", *args
 
     # install
     prefix.install "bin"
