@@ -1,0 +1,21 @@
+name: ARB HEAD
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-10.13, macOS-10.14, macOS-10.15, macOS-latest]
+        
+    steps:
+    - name: add taps
+      run: | 
+        brew tap arb-project/arb,
+        brew tap denismm/gv
+    - name: install X11 server
+      run: brew cask install xquartz
+    - name: Build HEAD version of ARB
+      run: brew install arb --HEAD --verbose
