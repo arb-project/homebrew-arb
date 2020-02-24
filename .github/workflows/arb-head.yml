@@ -17,9 +17,11 @@ jobs:
     - name: install other ARB dependencies
       run: brew install arb --HEAD --only-dependencies
     - name: build HEAD version of ARB
+      env:
+        HOMEBREW_LOGS: .homebrew-logs
       run: brew install arb --HEAD --verbose
     - name: save Homebrew logs
       uses: actions/upload-artifact@v1
       with:
         name: Homebrew logs
-        path: ~/Library/Logs/Homebrew/
+        path: .homebrew-logs/
