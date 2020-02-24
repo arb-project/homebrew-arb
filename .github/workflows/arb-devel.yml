@@ -1,0 +1,31 @@
+name: ARB devel
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    name: Build development version of ARB
+    runs-on: macos-latest
+
+    steps:
+    - name: add taps
+      run: |
+        brew tap arb-project/arb
+        brew tap denismm/gv
+    - name: install X11 server
+      run: brew cask install xquartz
+    - name: install other ARB dependencies
+      run: brew install arb --devel --only-dependencies
+    - name: build HEAD version of ARB
+      env:
+        HOMEBREW_LOGS: .homebrew-logs
+      run: brew install arb --devel
+    - name: save Homebrew logs
+      uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: Homebrew logs
+        path: .homebrew-logs/
