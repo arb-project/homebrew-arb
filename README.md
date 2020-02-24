@@ -1,5 +1,7 @@
 # homebrew-arb
 
+![ARB head](https://github.com/arb-project/homebrew-arb/workflows/ARB%20head/badge.svg)
+
 Homebrew tap for formulae to build [ARB](http://www.arb-home.de) and related
 software.
 
