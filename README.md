@@ -16,7 +16,6 @@ Open tasks
 - [ ] integration into the ARB release cycle, formula needs to be tagged, too
 - [ ] add formula for SINA
 - [ ] add SINA to ARB
-- [x] fix [cosmetic PERL bug](http://bugs.arb-home.de/ticket/508) - fixed in HEAD
 - [ ] repair OpenGL build
 
 ## Prerequisites
@@ -201,33 +200,3 @@ You can list the installed versions of ARB with
 ```bash
 brew list --versions arb
 ```
-
-## Perl support
-
-*This problem is fixed in the `HEAD` version. The next `DEVEL` version will
-also include the fix.*
-
-The versions created by this formula support all features of ARB which require
-perl scripts, e.g. `markSpecies.pl` or Import/Import fields from calc-sheet.
-
-On MacOS versions, ARB has a [cosmetic bug](http://bugs.arb-home.de/ticket/508)
-which results in the following error message being shown when ever a perl script
-is executed by ARB:
-
-    Error: 'Not inside GB_shell'
-    Can't continue - terminating..
-
-    -------------------- ARB-backtrace 'GBK_terminate (reason above) ':
-    0   ARB.bundle                          0x0000000107715836 _Z13GBK_terminatePKc + 66
-    1   ARB.bundle                          0x00000001077324a8 _ZN8GB_shellD1Ev + 0
-    2   ARB.bundle                          0x00000001077324b1 _ZN8GB_shellD1Ev + 9
-    3   libsystem_c.dylib                   0x00007fff9bbc9463 __cxa_finalize_ranges + 345
-    4   libsystem_c.dylib                   0x00007fff9bbc9767 exit + 55
-    5   perl                                0x000000010717de7d main + 303
-    6   libdyld.dylib                       0x00007fff9b51d5ad start + 1
-    -------------------- End of backtrace
-    [Terminating with signal 11]
-
-For the perl scripts included in ARB, this error is not restricting the
-functionality of the script. The script has been successfully executed and the
-error is occurring when the script terminates.
