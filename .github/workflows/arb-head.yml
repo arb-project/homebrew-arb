@@ -25,6 +25,7 @@ jobs:
       run: brew install arb --HEAD
     - name: save Homebrew logs
       uses: actions/upload-artifact@v1
+      if: failure()
       with:
         name: Homebrew logs
         path: .homebrew-logs/
