@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-
+    name: Build head version of ARB
     runs-on: macos-latest
         
     steps:
