@@ -19,7 +19,7 @@ jobs:
       run: brew cask install xquartz
     - name: install other ARB dependencies
       run: brew install arb --devel --only-dependencies
-    - name: build HEAD version of ARB
+    - name: build ARB
       env:
         HOMEBREW_LOGS: .homebrew-logs
       run: brew install arb --devel
