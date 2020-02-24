@@ -8,12 +8,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macOS-10.13, macOS-10.14, macOS-10.15, macOS-latest]
+        os: [macOS-10.14, macOS-10.15]
         
     steps:
     - name: add taps
       run: | 
-        brew tap arb-project/arb,
+        brew tap arb-project/arb
         brew tap denismm/gv
     - name: install X11 server
       run: brew cask install xquartz
