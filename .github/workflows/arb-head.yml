@@ -22,7 +22,7 @@ jobs:
     - name: build HEAD version of ARB
       env:
         HOMEBREW_LOGS: .homebrew-logs
-      run: brew install arb --HEAD --verbose
+      run: brew install arb --HEAD
     - name: save Homebrew logs
       uses: actions/upload-artifact@v1
       with:
