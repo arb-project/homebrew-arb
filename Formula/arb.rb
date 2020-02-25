@@ -135,6 +135,11 @@ class Arb < Formula
     # some perl scripts use /usr/bin/perl which does not work with ARB on MacOS
     # make all scripts use the perl version from the environment
     inreplace Dir["#{prefix}/PERL_SCRIPTS/**/*.pl"], %r{^#! */usr/bin/perl *$|^#! *perl *$}, "#!/usr/bin/env perl"
+
+    if build.head?
+      ohai "Verify ARB perl bindings"
+      system "ARBHOME=\"#{prefix}\" perl #{prefix}/PERL_SCRIPTS/ARBTOOLS/TESTS/automatic.pl -client homebrew -db #{prefix}/demo.arb"
+    end
   end
 
   def post_install

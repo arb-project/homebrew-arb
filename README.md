@@ -8,8 +8,8 @@ software.
 
 Open tasks
 
-- [ ] extend test for successful installation to make sure PERL integration
-      works(test block)
+- [X] extend test for successful installation to make sure PERL integration
+      works (fixed in HEAD version)
 - [ ] add stable version when 6.1 is released
 - [ ] configure Preview as viewer for PDF and PS files (removes GV dependency)
 - [ ] bottles
