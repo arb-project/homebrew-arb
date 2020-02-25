@@ -88,20 +88,6 @@ class Arb < Formula
 
     # create header file with revision information when building head
     if build.head?
-      cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/TOOLS/arb_export_newick.cxx', "#{buildpath}/TOOLS/"
-      cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/TOOLS/arb_test.cxx', "#{buildpath}/TOOLS/"
-      cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/TOOLS/Makefile', "#{buildpath}/TOOLS/"
-      cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/BINDEP/needs_libs.arb_export_newick', "#{buildpath}/BINDEP/"
-      cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/SOURCE_TOOLS/dep.alltargets', "#{buildpath}/SOURCE_TOOLS/"
-      cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/Makefile', "#{buildpath}/"
-      cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/UNIT_TESTER/Makefile.test', "#{buildpath}/UNIT_TESTER/"
-      # Replace GV
-      # cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/ARBDB/adsocket.cxx', "#{buildpath}/ARBDB/"
-      #
-      # cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/CORE/arb_strbuf.cxx', "#{buildpath}/CORE/"
-      # cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/NTREE/NT_sort.cxx', "#{buildpath}/NTREE/"
-      cp '/Users/jgerken/Documents/Projects/ARB/sources/trunk/PERL_SCRIPTS/ARBTOOLS/TESTS/automatic.pl', "#{buildpath}/PERL_SCRIPTS/ARBTOOLS/TESTS/"
-
       (buildpath/"TEMPLATES/svn_revision.h").write <<~EOS
         #define ARB_SVN_REVISION      "#{version}"
         #define ARB_SVN_BRANCH        "trunk"
@@ -149,11 +135,6 @@ class Arb < Formula
     # some perl scripts use /usr/bin/perl which does not work with ARB on MacOS
     # make all scripts use the perl version from the environment
     inreplace Dir["#{prefix}/PERL_SCRIPTS/**/*.pl"], %r{^#! */usr/bin/perl *$|^#! *perl *$}, "#!/usr/bin/env perl"
-
-    if build.head?
-      ohai "Verify ARB perl bindings"
-      system "ARBHOME=\"#{prefix}\" perl #{prefix}/PERL_SCRIPTS/ARBTOOLS/TESTS/automatic.pl -client homebrew -db #{prefix}/demo.arb"
-    end
   end
 
   def post_install
