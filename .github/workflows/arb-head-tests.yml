@@ -36,4 +36,4 @@ jobs:
       if: always()
       with:
         name: ARB test logs
-        path: UNIT_TESTER/logs
+        path: .arb-test-logs/

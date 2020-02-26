@@ -122,6 +122,12 @@ class Arb < Formula
       end
       opoo "The option --with-test is intended for developer use only. It may fail your build. If it does, install ARB without the option."
       system "make", "rebuild", "UNIT_TESTS=1", *args
+
+      if build.with?("test-only") && ENV["GITHUB_WORKSPACE"]
+        # copy logs from build directory to a logcation were the GitHub workflow
+        # can access them
+        mv "#{buildpath}/UNIT_TESTER/logs", "#{ENV["GITHUB_WORKSPACE"]}/.arb-test-logs"
+      end
     end
 
     if !build.with? "test-only"
