@@ -28,7 +28,10 @@ class Arb < Formula
   option "with-open-gl", "Include ARB features that use OpenGL. Broken - WIP."
 
   # for internal / ARB developer use only
-  option "with-test", "Execute unit tests during build. Not intended for end-users."
+  option "with-test", "Execute unit tests followed by normal build. Not intended for end-users."
+
+  # for GitHub actions / internal / ARB developer use only
+  option "with-test-only", "Execute unit tests during build, not followed by normal build. Not intended for end-users."
 
   # enable debug symbols in binaries
   option "with-debug", "Enable debug symbols in binaries. Not intended for end-users."
@@ -112,7 +115,7 @@ class Arb < Formula
     ENV.prepend_path "PATH", "#{buildpath}/bin"
 
     # build
-    if build.with? "test"
+    if build.with?("test") || build.with?("test-only")
       # TODO: remove when current devel version is released as stable
       if build.stable?
         odie "Option --with-test is not avaible for the stable version."
@@ -121,7 +124,9 @@ class Arb < Formula
       system "make", "rebuild", "UNIT_TESTS=1", *args
     end
 
-    system "make", "rebuild", *args
+    if !build.with? "test-only"
+      system "make", "rebuild", *args
+    end
 
     # install
     prefix.install "bin"
