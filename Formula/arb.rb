@@ -122,9 +122,11 @@ class Arb < Formula
       end
       opoo "The option --with-test is intended for developer use only. It may fail your build. If it does, install ARB without the option."
       system "make", "rebuild", "UNIT_TESTS=1", *args
+
+      ln_sf "#{buildpath}/UNIT_TESTER/logs", "#{ENV["HOMEBREW_LOGS"]}/#{name}/unit-tests"
     end
 
-    if !build.with? "test-only"
+    if build.without? "test-only"
       system "make", "rebuild", *args
     end
 

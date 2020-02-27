@@ -24,17 +24,10 @@ jobs:
     - name: build HEAD version of ARB
       env:
         HOMEBREW_LOGS: .homebrew-logs
-        HOMEBREW_TEMP: .homebrew-temp
       run: brew install arb --HEAD --with-test-only --keep-tmp
     - name: save Homebrew logs
       uses: actions/upload-artifact@v1
-      if: failure()
+      if: always()
       with:
         name: Homebrew logs
         path: .homebrew-logs/
-    - name: save ARB test logs
-      uses: actions/upload-artifact@v1
-      if: always()
-      with:
-        name: ARB test logs
-        path: .homebrew-temp/UNIT_TESTER/logs
