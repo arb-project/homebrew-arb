@@ -11,9 +11,9 @@ class Arb < Formula
 
   # ARB production version - called devel in homebrew
   devel do
-    url "http://download.arb-home.de/special/manual-builds/2020_02_21/arb-r18314-source.tgz"
-    sha256 "b302bc560e3315f0b7b464f6a6e20f45807027c6e8e189d76cd4dd8597dda0ae"
-    version "6.1-beta_r18314"
+    url "http://download.arb-home.de/special/manual-builds/2020_03_03/arb-r18342-source.tgz"
+    sha256 "f4e0c888f3af4c5f77049e7670254aa88559a1ca25faefe14caaa9bec6483baf"
+    version "6.1-beta_r18342"
   end
 
   # ARB development version - called HEAD in homebrew
