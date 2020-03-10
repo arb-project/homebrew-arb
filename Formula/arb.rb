@@ -116,10 +116,6 @@ class Arb < Formula
 
     # build
     if build.with?("test") || build.with?("test-only")
-      # TODO: remove when current devel version is released as stable
-      if build.stable?
-        odie "Option --with-test is not avaible for the stable version."
-      end
       opoo "The option --with-test is intended for developer use only. It may fail your build. If it does, install ARB without the option."
       system "make", "rebuild", "UNIT_TESTS=1", *args
 
