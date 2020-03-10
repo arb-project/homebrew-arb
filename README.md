@@ -41,13 +41,13 @@ brew cask install xquartz
 
 Homebrew has removed the `gv` formula from their repository. To install `arb`
 on fresh system (which had `gv` not installed via Homebrew previously), another
-tab must be added to Homebrew.
+tap must be added to Homebrew.
 
 ```bash
 brew tap denismm/gv
 ```
 
-If the installation of arb fails after adding the tab, you might need to
+If the installation of arb fails after adding the tap, you might need to
 uninstall `ghostscript` before installing `arb`.
 
 ```bash
@@ -121,7 +121,7 @@ you also want to install version 6.1.0:
 # unlink the current version of ARB
 brew unlink arb
 
-# change into the directory containing your local copy of this tab
+# change into the directory containing your local copy of this tap
 cd "$(brew --repo arb-project/arb)"
 
 # if you do not know the exact version you need to install, you can list
