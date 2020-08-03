@@ -57,11 +57,11 @@ brew uninstall ghostscript
 The `arb` formula allows you to install three different versions of ARB on your
 Mac. Homebrew and ARB using different naming conventions for the builds.
 
-| ARB name   | Homebrew name | command                    |
-| ---------- | --------------| -------------------------- |
-| release    | stable        | `brew install arb`         |
-| production | development   | `brew install --devel arb` |
-| n/a        | head          | `brew install --HEAD arb`  |
+| ARB name   | Homebrew name | command                                    |
+| ---------- | --------------| ------------------------------------------ |
+| release    | stable        | `brew install arb-project/arb/arb`         |
+| production | development   | `brew install --devel arb-project/arb/arb` |
+| n/a        | head          | `brew install --HEAD arb-project/arb/arb`  |
 
 **The stable version of ARB 6.0 does not work reliably when build with this
 formula. If you really need ARB 6.0 please use macports. This formula would have
@@ -131,7 +131,7 @@ git checkout tags/v6.1.0
 
 # install and tell Homebrew that it must not activate the newest version of the
 # formula
-HOMEBREW_NO_AUTO_UPDATE=1 brew install arb
+HOMEBREW_NO_AUTO_UPDATE=1 brew install arb-project/arb/arb
 ```
 
 After this steps version 6.1.0 of ARB will be installed and your active ARB
@@ -146,7 +146,7 @@ ARB. To enable OpenGL support in ARB add `--with-open-gl` to the build command,
 e.g.
 
 ```bash
-brew install --with-open-gl arb
+brew install --with-open-gl arb-project/arb/arb
 ```
 
 to build the stable version of ARB with OpenGL support.
@@ -165,7 +165,7 @@ sure everything is working as expected. To include the unit tests into the build
 run
 
 ```bash
-brew install arb --with-test
+brew install arb-project/arb/arb --with-test
 ```
 
 **This options is intended for contributors and ARB developers only. It may or
@@ -176,7 +176,7 @@ may not work at any given time. No support is given for using this option.**
 You can add debug symbols to the binary by using the debug option:
 
 ```bash
-brew install arb --with-debug
+brew install arb-project/arb/arb --with-debug
 ```
 
 This option is intended for contributors and not for end-users. ARB shouldn't be
