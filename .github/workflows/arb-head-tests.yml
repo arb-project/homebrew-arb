@@ -20,11 +20,11 @@ jobs:
     - name: install X11 server
       run: brew cask install xquartz
     - name: install other ARB dependencies
-      run: brew install arb --HEAD --only-dependencies
+      run: brew install arb-project/arb/arb --HEAD --only-dependencies
     - name: build HEAD version of ARB
       env:
         HOMEBREW_LOGS: ${{github.workspace}}/.homebrew-logs
-      run: brew install arb --HEAD --with-test-only --keep-tmp
+      run: brew install arb-project/arb/arb --HEAD --with-test-only --keep-tmp
     - name: save Homebrew logs
       uses: actions/upload-artifact@v1
       if: always()
