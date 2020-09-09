@@ -9,16 +9,16 @@ class Arb < Formula
   #   sha256 "8b1fc3fd11bbb05aca4731ac8803c004a4f2b6b87c11b543660d07ea349a6c21"
   # end
 
-  # ARB production version - called devel in homebrew
-  devel do
+  # ARB production version
+  stable do
     url "http://download.arb-home.de/special/manual-builds/2020_03_03/arb-r18342-source.tgz"
     sha256 "f4e0c888f3af4c5f77049e7670254aa88559a1ca25faefe14caaa9bec6483baf"
     version "6.1-beta_r18342"
   end
 
-  # ARB development version - called HEAD in homebrew
+  # ARB development version
   head do
-    url "http://vc.arb-home.de/readonly/trunk", :using => :svn
+     url "http://vc.arb-home.de/readonly/trunk", :using => :svn
   end
 
   ##############################################################################
