@@ -57,11 +57,11 @@ brew uninstall ghostscript
 The `arb` formula allows you to install three different versions of ARB on your
 Mac. Homebrew and ARB using different naming conventions for the builds.
 
-| ARB name   | Homebrew name | command                                    |
-| ---------- | --------------| ------------------------------------------ |
-| release    | stable        | `brew install arb-project/arb/arb`         |
-| production | development   | `brew install --devel arb-project/arb/arb` |
-| n/a        | head          | `brew install --HEAD arb-project/arb/arb`  |
+| ARB name   | Homebrew name | command                                   |
+| ---------- | ------------- | ----------------------------------------- |
+| release    |               | not available at the moment               |
+| production | stable        | `brew install arb-project/arb/arb`        |
+| n/a        | head          | `brew install --HEAD arb-project/arb/arb` |
 
 **The stable version of ARB 6.0 does not work reliably when build with this
 formula. If you really need ARB 6.0 please use macports. This formula would have
@@ -71,9 +71,10 @@ can use the current ARB 6.1 beta version by using the production version (see
 below).**
 
 The production version of ARB is installed and used in-house at MPI for
-Marine Microbiology in Bremen. It is frequently updated from development
-changes, i.e. it contains recent bug fixes and newest features, but also may
-break working things. It is updated at least every few months.
+Marine Microbiology in Bremen and is also the recommended version under Linux.
+It is frequently updated from development changes, i.e. it contains recent bug
+fixes and newest features, but also may break working things. It is updated at
+least every few months.
 
 If you use the production version, please file bug reports (if you encounter any
 bugs) via the [ARB bug tracker](http://bugs.arb-home.de/wiki/BugReport). It

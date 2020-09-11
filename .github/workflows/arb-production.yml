@@ -1,4 +1,4 @@
-name: ARB devel
+name: ARB Production
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build development version of ARB
+    name: Build production version of ARB
     runs-on: macos-latest
 
     steps:
@@ -18,11 +18,11 @@ jobs:
     - name: install X11 server
       run: brew cask install xquartz
     - name: install other ARB dependencies
-      run: brew install arb-project/arb/arb --devel --only-dependencies
+      run: brew install arb-project/arb/arb --only-dependencies
     - name: build ARB
       env:
         HOMEBREW_LOGS: .homebrew-logs
-      run: brew install arb-project/arb/arb --devel
+      run: brew install arb-project/arb/arb
     - name: save Homebrew logs
       uses: actions/upload-artifact@v1
       if: failure()
