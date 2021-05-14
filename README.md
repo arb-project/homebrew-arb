@@ -3,6 +3,8 @@
 ![ARB Production version](https://github.com/arb-project/homebrew-arb/workflows/ARB%20Production/badge.svg)
 ![ARB head version](https://github.com/arb-project/homebrew-arb/workflows/ARB%20head/badge.svg)
 
+⚠️ **The forumla is not working with current Homebrew versions. We clould not yet find a working solution to replace the ˋ:x11ˋ dependendy which Homebrew no longer supports.** ⚠️
+
 Homebrew tap for formulae to build [ARB](http://www.arb-home.de) and related
 software.
 
