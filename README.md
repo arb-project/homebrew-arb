@@ -34,7 +34,7 @@ Otherwise you must install it either by using the installer provided on the
 XQuartz website or via Homebrew:
 
 ```bash
-brew cask install xquartz
+brew install --cask xquartz
 ```
 
 Homebrew has removed the `gv` formula from their repository. To install `arb`
