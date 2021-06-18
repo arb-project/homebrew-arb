@@ -51,11 +51,10 @@ class Arb < Formula
   depends_on "gnu-sed"
   depends_on "gnu-time"
   depends_on "gnuplot"
-  depends_on "gv"
+  depends_on "libxaw"
   depends_on "lynx"
   depends_on "openmotif"
   depends_on "perl@5.18"
-  depends_on :x11
   depends_on "xerces-c"
   depends_on "xfig"
 
@@ -108,6 +107,7 @@ class Arb < Formula
       DEBIAN=0
       REDHAT=0
       DEBUG=#{build.with?("debug") ? 1 : 0}
+      TRACESYM=1
     ]
 
     # environment variables required by the build
@@ -123,7 +123,7 @@ class Arb < Formula
     end
 
     if build.without? "test-only"
-      system "make", "rebuild", *args
+      system "make", build.with?("test") ? "rebuild" : "all", *args
     end
 
     # install
