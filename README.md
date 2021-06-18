@@ -3,8 +3,6 @@
 ![ARB Production version](https://github.com/arb-project/homebrew-arb/workflows/ARB%20Production/badge.svg)
 ![ARB head version](https://github.com/arb-project/homebrew-arb/workflows/ARB%20head/badge.svg)
 
-⚠️ **The forumla is not working with current Homebrew versions. We clould not yet find a working solution to replace the `:x11` dependendy which Homebrew no longer supports.** ⚠️
-
 Homebrew tap for formulae to build [ARB](http://www.arb-home.de) and related
 software.
 
@@ -37,21 +35,6 @@ XQuartz website or via Homebrew:
 
 ```bash
 brew install --cask xquartz
-```
-
-Homebrew has removed the `gv` formula from their repository. To install `arb`
-on fresh system (which had `gv` not installed via Homebrew previously), another
-tap must be added to Homebrew.
-
-```bash
-brew tap denismm/gv
-```
-
-If the installation of arb fails after adding the tap, you might need to
-uninstall `ghostscript` before installing `arb`.
-
-```bash
-brew uninstall ghostscript
 ```
 
 ## Install ARB
