@@ -16,7 +16,6 @@ jobs:
     - name: add taps
       run: | 
         brew tap arb-project/arb
-        brew tap denismm/gv
     - name: install X11 server
       run: brew cask install xquartz
     - name: install other ARB dependencies
