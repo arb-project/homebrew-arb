@@ -24,9 +24,6 @@ class Arb < Formula
   ##############################################################################
   ### OPTIONS                                                                ###
   ##############################################################################
-  # currently broken, GLAPI is missing, not sure which package should provide it
-  option "with-open-gl", "Include ARB features that use OpenGL. Broken - WIP."
-
   # for internal / ARB developer use only
   option "with-test", "Execute unit tests followed by normal build. Not intended for end-users."
 
@@ -58,14 +55,11 @@ class Arb < Formula
   depends_on "xerces-c"
   depends_on "xfig"
 
-  # OpenGL dependencies, only used if build with '--with-open-gl'
-  if build.with?("open-gl")
-    depends_on "glfw"
-    depends_on "mesalib-glw"
-    depends_on "glew"
-    depends_on "freeglut"
-    # "Glbinding"
-  end
+  # OpenGL dependencies
+  depends_on "glfw"
+  depends_on "mesalib-glw"
+  depends_on "glew"
+  depends_on "freeglut"
 
   # Patch the ARB shell script to make sure ARB uses the same perl version at
   # runtime as this formula at build time. This patch will not be submitted to
@@ -100,7 +94,7 @@ class Arb < Formula
     # build options
     args = %W[
       ARB_64=1
-      OPENGL=#{build.with?("open-gl") ? 1 : 0}
+      OPENGL=1
       MACH=DARWIN
       DARWIN=1
       LINUX=0

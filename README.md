@@ -14,7 +14,7 @@ Open tasks
 - [ ] integration into the ARB release cycle, formula needs to be tagged, too
 - [ ] add formula for SINA
 - [ ] add SINA to ARB
-- [ ] repair OpenGL build
+- [X] repair OpenGL build
 
 ## Prerequisites
 
@@ -124,24 +124,6 @@ After this steps version 6.1.0 of ARB will be installed and your active ARB
 version.
 
 ### Options
-
-#### OpenGL
-
-By default all versions are build without support for the OpenGL features of
-ARB. To enable OpenGL support in ARB add `--with-open-gl` to the build command,
-e.g.
-
-```bash
-brew install --with-open-gl arb-project/arb/arb
-```
-
-to build the stable version of ARB with OpenGL support.
-
-**The OpenGL build is work in progress and currently not working due
-to a missing dependency. We haven't yet figured out which changes to the
-formula are required to fix the issue. Fixing this issue has a low priority as
-the missing feature is not affecting our work. Pull requests to fix this issue
-are welcome.**
 
 #### Unit tests
 
