@@ -11,9 +11,9 @@ class Arb < Formula
 
   # ARB production version
   stable do
-    url "http://download.arb-home.de/special/manual-builds/2020_11_10/arb-r18634-source.tgz"
-    sha256 "df7d3e17537a064048762d27e1f527c6633cecc7543f59266a302230b18274da"
-    version "6.1-beta_r18634"
+    url "http://download.arb-home.de/special/manual-builds/2021_07_01/arb-r18660-source.tgz"
+    sha256 "9047b654c4b0a863f0b2947a525396026a4699fe897a2e908ec66ba35b801fa6"
+    version "6.1-beta_r18660"
   end
 
   # ARB development version
