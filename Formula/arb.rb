@@ -1,19 +1,13 @@
 class Arb < Formula
-  desc "Graphical DNA, RNA and amino acid sequence analysis tool"
+  desc "Graphical DNA, RNA and amino acid sequence analysis tool - production version"
   homepage "http://www.arb-home.de"
-
-  # wil be activated when ARB 6.1 has been released
-  # ARB release version - called stable in homebrew
-  # stable do
-  #   url "http://download.arb-home.de/release/arb-6.0.6/arb-6.0.6-source.tgz"
-  #   sha256 "8b1fc3fd11bbb05aca4731ac8803c004a4f2b6b87c11b543660d07ea349a6c21"
-  # end
 
   # ARB production version
   stable do
-    url "http://download.arb-home.de/special/manual-builds/2021_07_08/arb-r18662-source.tgz"
-    sha256 "a2b86eff5530780940990dc6551ef63e01fca11437d423c499ba25fab8cd5a7d"
-    version "6.1-beta_r18662"
+    url "http://download.arb-home.de/release/arb-7.0/arb-7.0-source.tgz"
+    sha256 "e05a747faae3da1e03e26e44d3eee3e7cf26b0ccdd73abb26167b4342fae7d90"
+    # currently identical to the relase version (7.0)
+    version "7.0"
   end
 
   # ARB development version
