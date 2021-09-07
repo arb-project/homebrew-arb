@@ -128,6 +128,17 @@ class ArbAT7 < Formula
 
     # delete Makefile from binary directory
     File.delete("#{prefix}/bin/Makefile")
+    # delete .gitignore from all directories
+    Dir["#{prefix}/**/.gitignore"].each do |file|
+      File.delete(file)
+    end
+    # delete txt files from lib
+    Dir["#{prefix}/**/*.txt"].each do |file|
+      File.delete(file)
+    end
+    Dir["#{prefix}/**/*.readme"].each do |file|
+      File.delete(file)
+    end
 
     ohai "Verify ARB perl bindings"
     system "ARBHOME=\"#{prefix}\" perl #{prefix}/PERL_SCRIPTS/ARBTOOLS/TESTS/automatic.pl -client homebrew -db #{prefix}/demo.arb"
