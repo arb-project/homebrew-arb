@@ -1,5 +1,6 @@
 # homebrew-arb
 
+![ARB 7](https://github.com/arb-project/homebrew-arb/workflows/ARB%207/badge.svg)
 ![ARB Production version](https://github.com/arb-project/homebrew-arb/workflows/ARB%20Production/badge.svg)
 ![ARB head version](https://github.com/arb-project/homebrew-arb/workflows/ARB%20head/badge.svg)
 
@@ -8,13 +9,10 @@ software.
 
 Open tasks
 
-- [ ] add stable version when 6.1 is released
-- [X] configure Preview as viewer for PDF and PS files (removes GV dependency)
 - [ ] bottles
 - [ ] integration into the ARB release cycle, formula needs to be tagged, too
 - [ ] add formula for SINA
 - [ ] add SINA to ARB
-- [X] repair OpenGL build
 
 ## Prerequisites
 
@@ -40,69 +38,67 @@ brew install --cask xquartz
 ## Install ARB
 
 The `arb` formula allows you to install three different versions of ARB on your
-Mac. Homebrew and ARB using different naming conventions for the builds.
+Mac via two formulas. Homebrew and ARB are using different naming conventions
+for the builds.
 
-| ARB name   | Homebrew name | command                                   |
-| ---------- | ------------- | ----------------------------------------- |
-| release    |               | not available at the moment               |
-| production | stable        | `brew install arb-project/arb/arb`        |
-| n/a        | head          | `brew install --HEAD arb-project/arb/arb` |
+| ARB name   | Homebrew name | Formula | command                                     |
+| ---------- | ------------- | ------- | ------------------------------------------- |
+| release    | stable        | arb@7   | `brew install arb-project/arb/arb@7`        |
+| production | stable        | arb     | `brew install arb-project/arb/arb`          |
+| stable     | head          | arb@7   | `brew install --HEAD arb-project/arb/arb@7` |
+| trunk      | head          | arb     | `brew install --HEAD arb-project/arb/arb`   |
 
-**The stable version of ARB 6.0 does not work reliably when build with this
-formula. If you really need ARB 6.0 please use macports. This formula would have
-to apply too many changes to make ARB 6.0 work in the Homebew environment.
-Therefore, the stable version is not supported until ARB 6.1 is released. You
-can use the current ARB 6.1 beta version by using the production version (see
-below).**
-
-The production version of ARB is installed and used in-house at MPI for
-Marine Microbiology in Bremen and is also the recommended version under Linux.
-It is frequently updated from development changes, i.e. it contains recent bug
-fixes and newest features, but also may break working things. It is updated at
-least every few months.
+The production version of ARB is installed and used in-house at MPI for Marine
+Microbiology in Bremen, Germany, and is also the recommended version under
+Linux. It is frequently updated from development changes, i.e. it contains
+recent bug fixes and the newest features, but also may break working things. It
+is updated at least every few months.
 
 If you use the production version, please file bug reports (if you encounter any
 bugs) via the [ARB bug tracker](http://bugs.arb-home.de/wiki/BugReport). It
 helps the ARB team to make the next release version more stable.
 
-The head version of ARB gives you the latest changes from development, including
-the latest bug fixes and features. However, any of the changes might break
-working things as the version might just be in the beginning of being tested. It
-is not recommended to install this version for daily, productive usage but it
-gives you the opportunity to test if the latest changes in development resolve
-any issues you might have with the release and/or production version of ARB.
+The trunk version of ARB gives you the latest changes from development,
+including the latest bug fixes and features. However, any of the changes might
+break working things as the version might just be in the beginning of being
+tested. It is not recommended to install this version for daily, productive
+usage but it gives you the opportunity to test if the latest changes in
+development resolve any issues you might have with the release and/or production
+version of ARB.
 
-### Install arbitrary versions of ARB
+The stable version is not intended for end-users as it will - most of the time -
+be the same as the release version. Only shortly before a release, it will
+contain the next release version (a.k.a release candidate). We require this
+version for the final tests to make sure a release will also work on macOS. You
+should never need to install this version unless the ARB team asks you to.
 
-You can install arbitrary versions of ARB by editing the Homebrew formula for
-ARB and specifying a revision for the head build. This requires you to be a
-brew expert user. If you don't know how to edit formulas you shouldn't do it.
+### Install multiple versions of ARB at the same time
 
-Please keep in mind that the revision you are trying to install might contain
-broken features or might not even compile (on a Mac) at all. Building older
-revisions might even require to change the dependencies and/or build steps in
-the formula. Please be aware that you build these revisions on you own risk and
-that we cannot provide support for these builds.
+The four versions listed above, can be installed at the same time but only one
+can be linked by Homebrew (meaning you can execute it by typing `arb`). Before
+installing an additional version, you should unlink the existing one (see
+[Switching between versions](#switching-between-versions)). Otherwise, Homebrew
+will complain that it cannot link the new version:
+
+```bash
+Error: The `brew link` step did not complete successfully
+The formula built, but is not symlinked into /usr/local
+[... rest of the error message is omitted for the sake brevity]
+```
 
 ### Install an old release / production version
 
-You can install an old release / production version of ARB using Homebrew.
-Normally this is not required as Homebrew does not delete old versions when you
-install a new version (see switching between versions) unless you call
-`brew cleanup`.
+If you need to install an old version you need to activate the corresponding
+version of the formula. The oldest versions you can install are
 
-If you need to install an old release on a new Mac or after a cleanup you need
-to activate the corresponding version of the formula. The oldest versions you
-can install are
+- `arb@7`: 7.0
+- `arb`: 6.1-beta_r18660
 
-- Release: n/a
-- Production 6.1-beta_r17491
-
-Let's assume the ARB team has released version 6.2.0 and you installed it but
-you also want to install version 6.1.0:
+Let's assume you have installed the latest production version but you also want
+to install version 6.1-beta_r18660:
 
 ```bash
-# unlink the current version of ARB
+# unlink the current production version of ARB
 brew unlink arb
 
 # change into the directory containing your local copy of this tap
@@ -120,52 +116,33 @@ git checkout tags/v6.1.0
 HOMEBREW_NO_AUTO_UPDATE=1 brew install arb-project/arb/arb
 ```
 
-After this steps version 6.1.0 of ARB will be installed and your active ARB
-version.
+After this steps version 6.1-beta_r18660 of ARB will be installed and your
+active ARB version.
 
-### Options
+### Install arbitrary versions of ARB
 
-#### Unit tests
+You can install arbitrary versions of ARB by editing the Homebrew formula for
+ARB and specifying a revision for the head build. This requires you to be a
+brew expert user. If you don't know how to edit formulas you shouldn't do it.
 
-By default all versions are build without executing the unit tests of ARB.
-However, when preparing a new release for MacOS they should be executed to make
-sure everything is working as expected. To include the unit tests into the build
-run
-
-```bash
-brew install arb-project/arb/arb --with-test
-```
-
-**This options is intended for contributors and ARB developers only. It may or
-may not work at any given time. No support is given for using this option.**
-
-#### Debug
-
-You can add debug symbols to the binary by using the debug option:
-
-```bash
-brew install arb-project/arb/arb --with-debug
-```
-
-This option is intended for contributors and not for end-users. ARB shouldn't be
-used with debug symbols enabled for your daily work.
+Please keep in mind that the revision you are trying to install might contain
+broken features or might not even compile (on a Mac) at all. Building older
+revisions might even require to change the dependencies and/or build steps in
+the formula. Please be aware that you build these revisions on you own risk and
+that we cannot provide support for these builds.
 
 ## Switching between versions
 
 When you install different versions of ARB you can switch between them using
-the `switch` command of Homebrew.
+the Homebrew's `unlink` and `link` command. You first need to unlink the version
+your are currently using and then link the version you would like to use.
 
-```bash
-brew switch arb 6.1.0
-```
-
-will activate the release version 6.1.0 of ARB (if installed).
-
-You can list the installed versions of ARB with
-
-```bash
-brew list --versions arb
-```
+| ARB version | Unlink command      | Link command             |
+| ----------- | ------------------- | ------------------------ |
+| release     | `brew unlink arb@7` | `brew link arb@7`        |
+| production  | `brew unlink arb`   | `brew link arb`          |
+| stable      | `brew unlink arb@7` | `brew link --HEAD arb@7` |
+| trunk       | `brew unlink arb`   | `brew link --HEAD arb`   |
 
 ## Configuration
 
