@@ -1,18 +1,17 @@
-class Arb < Formula
-  desc "Graphical DNA, RNA and amino acid sequence analysis tool - production version"
+class ArbAT7 < Formula
+  desc "Graphical DNA, RNA and amino acid sequence analysis tool"
   homepage "http://www.arb-home.de"
 
-  # ARB production version
+  # ARB release version
   stable do
     url "http://download.arb-home.de/release/arb-7.0/arb-7.0-source.tgz"
     sha256 "e05a747faae3da1e03e26e44d3eee3e7cf26b0ccdd73abb26167b4342fae7d90"
-    # currently identical to the relase version (7.0)
     version "7.0"
   end
 
   # ARB development version
   head do
-     url "http://vc.arb-home.de/readonly/trunk", :using => :svn
+     url "http://vc.arb-home.de/readonly/branches/stable", :using => :svn
   end
 
   ##############################################################################

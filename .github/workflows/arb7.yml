@@ -1,0 +1,33 @@
+name: ARB 7
+
+on:
+  push:
+  schedule:
+    - cron: "0 0 * * 1"
+
+jobs:
+  build:
+    name: Build ARB 7
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: add tap from current branch
+      run: |
+        mkdir -p $(dirname $(brew --repo arb-project/arb))
+        ln -s $PWD $(brew --repo arb-project/arb)
+    - name: install X11 server
+      run: brew install --cask xquartz
+    - name: install other ARB dependencies
+      run: brew install arb-project/arb/arb@7 --only-dependencies
+    - name: build ARB
+      env:
+        HOMEBREW_LOGS: .homebrew-logs
+      run: brew install arb-project/arb/arb@7
+    - name: save Homebrew logs
+      uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: Homebrew logs
+        path: .homebrew-logs/
