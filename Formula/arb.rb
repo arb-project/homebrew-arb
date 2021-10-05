@@ -55,6 +55,8 @@ class Arb < Formula
   depends_on "glew"
   depends_on "freeglut"
 
+  conflicts_with "arb"
+
   # Patch the ARB shell script to make sure ARB uses the same perl version at
   # runtime as this formula at build time. This patch will not be submitted to
   # upstream (decision made with the ARB team). The brew audit (brew audit
