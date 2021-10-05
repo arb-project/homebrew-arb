@@ -4,10 +4,9 @@ class Arb < Formula
 
   # ARB production version
   stable do
-    url "http://download.arb-home.de/release/arb-7.0/arb-7.0-source.tgz"
-    sha256 "e05a747faae3da1e03e26e44d3eee3e7cf26b0ccdd73abb26167b4342fae7d90"
-    # currently identical to the relase version (7.0)
-    version "7.0"
+    url "http://download.arb-home.de/production/2021_09_16/arb-r18733-source.tgz"
+    sha256 "e6059ea50ad9cc4383f66d1b7acc048a4e22ccca170c1d09ffedb78a56977d87"
+    version "7.1-beta_r18733"
   end
 
   # ARB development version
