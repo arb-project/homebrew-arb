@@ -55,6 +55,8 @@ class Arb < Formula
   depends_on "glew"
   depends_on "freeglut"
 
+  conflicts_with "arb"
+
   # Patch the ARB shell script to make sure ARB uses the same perl version at
   # runtime as this formula at build time. This patch will not be submitted to
   # upstream (decision made with the ARB team). The brew audit (brew audit
@@ -115,6 +117,12 @@ class Arb < Formula
     end
 
     # install
+    # libexec is the Homebrew location to add binaries to which should not be
+    # symlinked into HOMEBREW_PREFIX and we want none of the binaries to be
+    # linked
+    libexec.install Dir["bin/*"]
+    # except for the arb wrapper script
+    bin.install_symlink "#{libexec}/arb"
     prefix.install "bin"
     prefix.install "lib"
     prefix.install "GDEHELP"
@@ -123,12 +131,15 @@ class Arb < Formula
     prefix.install "demo.arb"
     (lib/"help").install "HELP_SOURCE/oldhelp"
 
+    # fix arb wrapper to use libexec instead of bin
+    inreplace Dir["#{libexec}/arb"], %r{\$ARBHOME/bin}, "\$ARBHOME/libexec"
+
     # some perl scripts use /usr/bin/perl which does not work with ARB on MacOS
     # make all scripts use the perl version from the environment
     inreplace Dir["#{prefix}/PERL_SCRIPTS/**/*.pl"], %r{^#! */usr/bin/perl *$|^#! *perl *$}, "#!/usr/bin/env perl"
 
     # delete Makefile from binary directory
-    File.delete("#{prefix}/bin/Makefile")
+    File.delete("#{libexec}/Makefile")
     # delete .gitignore from all directories
     Dir["#{prefix}/**/.gitignore"].each do |file|
       File.delete(file)
