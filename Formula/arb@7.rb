@@ -128,7 +128,6 @@ class ArbAT7 < Formula
     prefix.install "PERL_SCRIPTS"
     prefix.install "SH"
     prefix.install "demo.arb"
-    (lib/"help").install "HELP_SOURCE/oldhelp"
 
     # fix arb wrapper to use libexec instead of bin
     inreplace Dir["#{libexec}/arb"], %r{\$ARBHOME/bin}, "\$ARBHOME/libexec"
