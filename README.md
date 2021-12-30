@@ -40,7 +40,7 @@ brew install --cask xquartz
 At the moment, we do not support running ARB natively on M1 Macs (due to the
 lack of testing device). However, ARB can be installed and run on these devices
 using the Rosetta compatibility layer. Please see the
-[ARB wiki|http://bugs.arb-home.de/wiki/ArbOSX#ARBonM1] for the additional steps
+[ARB wiki](http://bugs.arb-home.de/wiki/ArbOSX#ARBonM1) for the additional steps
 required.
 
 ## Install ARB
