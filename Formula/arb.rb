@@ -4,6 +4,8 @@ class Arb < Formula
 
   # ARB production version
   stable do
+    # FIXME: enable installation of stable version on macOS 12 when updating
+    # to the next release
     url "http://download.arb-home.de/production/2021_09_16/arb-r18733-source.tgz"
     sha256 "e6059ea50ad9cc4383f66d1b7acc048a4e22ccca170c1d09ffedb78a56977d87"
     version "7.1-beta_r18733"
@@ -67,9 +69,28 @@ class Arb < Formula
   ### INSTALL                                                                ###
   ##############################################################################
   def install
+
+    # FIXME: remove when updating to next stable version
+    if MacOS::version >= :monterey && build.stable?
+      odie "The production version of ARB is currently only not working on" +
+           " macOS Monterey or newer. This will be fixed with the next" +
+           " production release. Please use the head version (--HEAD) for " +
+           " now. We are sorry for the inconvenience!"
+    end
+
     # set a fixed perl path in the arb script
     which_perl = which("perl").parent.to_path
     inreplace Dir["#{buildpath}/SH/arb"], /___PERL_PATH___/, which_perl
+
+    # some perl scripts use /usr/bin/perl which does not work with ARB on MacOS
+    # make all scripts use the perl version from the environment
+    inreplace Dir["#{buildpath}/**/*.pl"] do |s|
+      # The false in the gsub! call makes homebrew not throw an error if there
+      # is no line naming the perl executable in the script files (which is they
+      # case for some scripts).
+      s.gsub!(/^#!.*perl/, "#!#{which_perl}/perl", false)
+    end
+
     # on some systems the permissions were incorrect after the patch
     # leading to the symlink in bin not be created -> make sure they are correct
     chmod 0555, "#{buildpath}/SH/arb"
@@ -122,7 +143,6 @@ class Arb < Formula
     libexec.install Dir["bin/*"]
     # except for the arb wrapper script
     bin.install_symlink "#{libexec}/arb"
-    prefix.install "bin"
     prefix.install "lib"
     prefix.install "GDEHELP"
     prefix.install "PERL_SCRIPTS"
@@ -131,10 +151,6 @@ class Arb < Formula
 
     # fix arb wrapper to use libexec instead of bin
     inreplace Dir["#{libexec}/arb"], %r{\$ARBHOME/bin}, "\$ARBHOME/libexec"
-
-    # some perl scripts use /usr/bin/perl which does not work with ARB on MacOS
-    # make all scripts use the perl version from the environment
-    inreplace Dir["#{prefix}/PERL_SCRIPTS/**/*.pl"], %r{^#! */usr/bin/perl *$|^#! *perl *$}, "#!/usr/bin/env perl"
 
     # delete Makefile from binary directory
     File.delete("#{libexec}/Makefile")

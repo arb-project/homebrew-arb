@@ -4,9 +4,9 @@ class ArbAT7 < Formula
 
   # ARB release version
   stable do
-    url "http://download.arb-home.de/release/arb-7.0/arb-7.0-source.tgz"
-    sha256 "e05a747faae3da1e03e26e44d3eee3e7cf26b0ccdd73abb26167b4342fae7d90"
-    version "7.0"
+    url "http://download.arb-home.de/build/arb-7.0.1/arb-7.0.1-source.tgz"
+    sha256 "f852483be1ff520ca1f13f3a048e7c3c9b02c2cb6d81b1fe59b7984d94175e50"
+    version "7.0.1"
   end
 
   # ARB development version
@@ -70,6 +70,16 @@ class ArbAT7 < Formula
     # set a fixed perl path in the arb script
     which_perl = which("perl").parent.to_path
     inreplace Dir["#{buildpath}/SH/arb"], /___PERL_PATH___/, which_perl
+
+    # some perl scripts use /usr/bin/perl which does not work with ARB on MacOS
+    # make all scripts use the perl version from the environment
+    inreplace Dir["#{buildpath}/**/*.pl"] do |s|
+      # The false in the gsub! call makes homebrew not throw an error if there
+      # is no line naming the perl executable in the script files (which is they
+      # case for some scripts).
+      s.gsub!(/^#!.*perl/, "#!#{which_perl}/perl", false)
+    end
+
     # on some systems the permissions were incorrect after the patch
     # leading to the symlink in bin not be created -> make sure they are correct
     chmod 0555, "#{buildpath}/SH/arb"
@@ -122,7 +132,6 @@ class ArbAT7 < Formula
     libexec.install Dir["bin/*"]
     # except for the arb wrapper script
     bin.install_symlink "#{libexec}/arb"
-    prefix.install "bin"
     prefix.install "lib"
     prefix.install "GDEHELP"
     prefix.install "PERL_SCRIPTS"
@@ -131,10 +140,6 @@ class ArbAT7 < Formula
 
     # fix arb wrapper to use libexec instead of bin
     inreplace Dir["#{libexec}/arb"], %r{\$ARBHOME/bin}, "\$ARBHOME/libexec"
-
-    # some perl scripts use /usr/bin/perl which does not work with ARB on MacOS
-    # make all scripts use the perl version from the environment
-    inreplace Dir["#{prefix}/PERL_SCRIPTS/**/*.pl"], %r{^#! */usr/bin/perl *$|^#! *perl *$}, "#!/usr/bin/env perl"
 
     # delete Makefile from binary directory
     File.delete("#{libexec}/Makefile")
