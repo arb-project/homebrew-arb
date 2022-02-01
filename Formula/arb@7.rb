@@ -4,9 +4,9 @@ class ArbAT7 < Formula
 
   # ARB release version
   stable do
-    url "http://download.arb-home.de/release/arb-7.0/arb-7.0-source.tgz"
-    sha256 "e05a747faae3da1e03e26e44d3eee3e7cf26b0ccdd73abb26167b4342fae7d90"
-    version "7.0"
+    url "http://download.arb-home.de/build/arb-7.0.1/arb-7.0.1-source.tgz"
+    sha256 "f852483be1ff520ca1f13f3a048e7c3c9b02c2cb6d81b1fe59b7984d94175e50"
+    version "7.0.1"
   end
 
   # ARB development version
