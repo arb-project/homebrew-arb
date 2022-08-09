@@ -136,24 +136,18 @@ class Arb < Formula
       system "make", build.with?("test") ? "rebuild" : "all", *args
     end
 
-    # install
-    # libexec is the Homebrew location to add binaries to which should not be
-    # symlinked into HOMEBREW_PREFIX and we want none of the binaries to be
-    # linked
-    libexec.install Dir["bin/*"]
-    # except for the arb wrapper script
-    bin.install_symlink "#{libexec}/arb"
-    prefix.install "lib"
-    prefix.install "GDEHELP"
-    prefix.install "PERL_SCRIPTS"
-    prefix.install "SH"
-    prefix.install "demo.arb"
+    # Install arb in sub-directory of the formula to prevent collision between
+    # arb binaries / bundled 3rd-party binaries and other binaries
+    arbInstallDir = prefix/"ArbHome"
+    arbInstallDir.install "bin"
+    arbInstallDir.install "lib"
+    arbInstallDir.install "GDEHELP"
+    arbInstallDir.install "PERL_SCRIPTS"
+    arbInstallDir.install "SH"
+    arbInstallDir.install "demo.arb"
+    # Make Homebrew link only the arb script
+    bin.install_symlink "#{arbInstallDir}/bin/arb"
 
-    # fix arb wrapper to use libexec instead of bin
-    inreplace Dir["#{libexec}/arb"], %r{\$ARBHOME/bin}, "\$ARBHOME/libexec"
-
-    # delete Makefile from binary directory
-    File.delete("#{libexec}/Makefile")
     # delete .gitignore from all directories
     Dir["#{prefix}/**/.gitignore"].each do |file|
       File.delete(file)
@@ -167,21 +161,24 @@ class Arb < Formula
     end
 
     ohai "Verify ARB perl bindings"
-    system "ARBHOME=\"#{prefix}\" perl #{prefix}/PERL_SCRIPTS/ARBTOOLS/TESTS/automatic.pl -client homebrew -db #{prefix}/demo.arb"
+    system "ARBHOME=\"#{arbInstallDir}\" perl #{arbInstallDir}/PERL_SCRIPTS/ARBTOOLS/TESTS/automatic.pl -client homebrew -db #{arbInstallDir}/demo.arb"
   end
 
   def post_install
+    arbInstallDir = prefix/"ArbHome"
     # make directory for pt_server
-    (lib/"pts").mkpath
+    (arbInstallDir/"lib/pts").mkpath
     # pt_server expects that everyone can read and write
-    chmod 0777, lib/"pts"
+    chmod 0777, arbInstallDir/"lib/pts"
     # make PT server configuration writeable
-    chmod 0666, lib/"arb_tcp.dat"
+    chmod 0666, arbInstallDir/"lib/arb_tcp.dat"
   end
 
-  def caveats; <<~EOS
+  def caveats
+    arbInstallDir = prefix/"ArbHome"
+    <<~EOS
     - run ARB by typing arb
-    - a demo database is installed in #{prefix}/demo.arb
+    - a demo database is installed in #{arbInstallDir}/demo.arb
     - for information how to install different versions of ARB via Homebrew see
       https://github.com/arb-project/homebrew-arb
     - more information about ARB can be found at http://www.arb-home.de
@@ -203,6 +200,11 @@ class Arb < Formula
         - use CONTROL COMMAND ARROW KEY to jump over bases
         - use OPTION ARROW KEY to pull in bases across alignment gaps
         - use right COMMAND plus a letter key to activate a menu item
+    - the structure of the installation has changed on macOS. If you
+      used/referenced to binaries without using the "arb shell" you need to
+      adopt your scripts. The ARB binaries version can be found in
+      #{arbInstallDir}/bin, the PERL scripts in
+      #{arbInstallDir}/PERL_SCRIPTS.
 
     Please cite
 
