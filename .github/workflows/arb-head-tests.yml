@@ -8,7 +8,10 @@ on:
 jobs:
   build:
     name: Run tests for head version of ARB
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        os: [macos-11, macos-12]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout
