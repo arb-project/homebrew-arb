@@ -8,8 +8,11 @@ on:
 jobs:
   build:
     name: Build head version of ARB
-    runs-on: macos-latest
-        
+    strategy:
+      matrix:
+        os: [macos-11, macos-12]
+    runs-on: ${{ matrix.os }}
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2

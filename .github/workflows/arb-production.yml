@@ -2,13 +2,16 @@ name: ARB Production
 
 on:
   push:
-  schedule: 
+  schedule:
     - cron: "0 0 * * 1"
 
 jobs:
   build:
     name: Build production version of ARB
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        os: [macos-11, macos-12]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout
