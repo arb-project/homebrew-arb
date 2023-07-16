@@ -10,7 +10,7 @@ jobs:
     name: Run tests for head version of ARB
     strategy:
       matrix:
-        os: [macos-11, macos-12]
+        os: [macos-11, macos-12, macos-13]
     runs-on: ${{ matrix.os }}
 
     steps:
