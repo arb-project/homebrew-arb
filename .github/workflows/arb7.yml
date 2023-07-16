@@ -10,7 +10,7 @@ jobs:
     name: Build ARB 7
     strategy:
       matrix:
-        os: [macos-11, macos-12]
+        os: [macos-11, macos-12, macos-13]
     runs-on: ${{ matrix.os }}
 
     steps:
