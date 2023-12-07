@@ -44,7 +44,7 @@ class Arb < Formula
   depends_on "libxaw"
   depends_on "lynx"
   depends_on "openmotif"
-  depends_on "perl@5.36"
+  depends_on "arb-project/arb/perl@5.36"
   depends_on "xerces-c"
   depends_on "xfig"
 
