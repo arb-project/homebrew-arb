@@ -61,7 +61,36 @@ class Arb < Formula
   # upstream (decision made with the ARB team). The brew audit (brew audit
   # --new-formula arb) will complain about the patch, the three corresponding
   # errors in the report can be ignored.
+  # at the moment different patches are required for HEAD and production
   patch :DATA
+
+  stable do
+    patch "
+diff --git a/Makefile b/Makefile
+--- a/Makefile
++++ b/Makefile
+@@ -700,6 +700,7 @@ dflags += -D$(MACH) # define machine
+
+ ifeq ($(DARWIN),1)
+  shared_cflags += -fno-common
++ cflags +=  -Wno-error=implicit-function-declaration
+ else
+  dflags +=  $(shell getconf LFS_CFLAGS)
+ endif
+diff --git a/GDE/SATIVA/Makefile b/GDE/SATIVA/Makefile
+--- a/GDE/SATIVA/Makefile
++++ b/GDE/SATIVA/Makefile
+@@ -58,7 +58,7 @@ build:  $(VERSIONS:%=$(RAXML_BIN)%)
+ #  which are needed by RAxML)
+ 
+ $(RAXML_BIN)%: unpack.%.stamp Makefile
+-	( MAKEFLAGS= $(MAKE) -C $(<:unpack.%.stamp=builddir.%) -f Makefile.$(@:$(RAXML_BIN)%=%).$(MAKE_SUFFIX) ) 2>&1 | grep -vi ' warning: '
++	( MAKEFLAGS= $(MAKE) -C $(<:unpack.%.stamp=builddir.%) -f Makefile.$(@:$(RAXML_BIN)%=%).$(MAKE_SUFFIX) CFLAGS=\"-Wno-error=implicit-function-declaration\" ) 2>&1 | grep -vi ' warning: '
+ 	cp $(<:unpack.%.stamp=builddir.%)/raxmlHPC-* $@
+ 
+ unpack.%.stamp: $(TARFILE)  
+    "
+  end
 
   ##############################################################################
   ### INSTALL                                                                ###
@@ -222,27 +251,3 @@ diff --git a/SH/arb b/SH/arb
  # set -x
 
  # error message function
-diff --git a/Makefile b/Makefile
---- a/Makefile
-+++ b/Makefile
-@@ -700,6 +700,7 @@ dflags += -D$(MACH) # define machine
-
- ifeq ($(DARWIN),1)
-  shared_cflags += -fno-common
-+ cflags +=  -Wno-error=implicit-function-declaration
- else
-  dflags +=  $(shell getconf LFS_CFLAGS)
- endif
-diff --git a/GDE/SATIVA/Makefile b/GDE/SATIVA/Makefile
---- a/GDE/SATIVA/Makefile
-+++ b/GDE/SATIVA/Makefile
-@@ -58,7 +58,7 @@ build:  $(VERSIONS:%=$(RAXML_BIN)%)
- #  which are needed by RAxML)
- 
- $(RAXML_BIN)%: unpack.%.stamp Makefile
--	( MAKEFLAGS= $(MAKE) -C $(<:unpack.%.stamp=builddir.%) -f Makefile.$(@:$(RAXML_BIN)%=%).$(MAKE_SUFFIX) ) 2>&1 | grep -vi ' warning: '
-+	( MAKEFLAGS= $(MAKE) -C $(<:unpack.%.stamp=builddir.%) -f Makefile.$(@:$(RAXML_BIN)%=%).$(MAKE_SUFFIX) CFLAGS="-Wno-error=implicit-function-declaration" ) 2>&1 | grep -vi ' warning: '
- 	cp $(<:unpack.%.stamp=builddir.%)/raxmlHPC-* $@
- 
- unpack.%.stamp: $(TARFILE)
-
