@@ -251,3 +251,15 @@ diff --git a/SH/arb b/SH/arb
  # set -x
 
  # error message function
+diff --git a/Makefile b/Makefile
+--- a/Makefile
++++ b/Makefile
+@@ -939,7 +939,7 @@
+ #---------------------- warn about duplicate variable definitions
+
+ ifeq ($(DARWIN),1)
+-clflags += -Wl,-warn_commons
++# clflags += -Wl,-warn_commons
+ else
+ clflags += -Wl,--warn-common
+ endif
