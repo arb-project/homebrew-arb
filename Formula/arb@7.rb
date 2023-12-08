@@ -44,7 +44,7 @@ class ArbAT7 < Formula
   depends_on "libxaw"
   depends_on "lynx"
   depends_on "openmotif"
-  depends_on "perl@5.36"
+  depends_on "arb-project/arb/perl@5.36"
   depends_on "xerces-c"
   depends_on "xfig"
 
@@ -245,3 +245,15 @@ diff --git a/GDE/SATIVA/Makefile b/GDE/SATIVA/Makefile
  
  unpack.%.stamp: $(TARFILE)
 
+diff --git a/Makefile b/Makefile
+--- a/Makefile
++++ b/Makefile
+@@ -939,7 +939,7 @@
+ #---------------------- warn about duplicate variable definitions
+
+ ifeq ($(DARWIN),1)
+-clflags += -Wl,-warn_commons
++# clflags += -Wl,-warn_commons
+ else
+ clflags += -Wl,--warn-common
+ endif
