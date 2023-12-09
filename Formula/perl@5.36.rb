@@ -17,6 +17,8 @@ class PerlAT536 < Formula
     end
   end
 
+  keg_only "Workaround: dedicated perl version for ARB to always have the same and supported perl version."
+
   livecheck do
     url "https://www.cpan.org/src/"
     regex(/href=.*?perl[._-]v?(\d+\.\d*[02468](?:\.\d+)*)\.t/i)
