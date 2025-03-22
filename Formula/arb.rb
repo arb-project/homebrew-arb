@@ -107,7 +107,7 @@ diff --git a/GDE/SATIVA/Makefile b/GDE/SATIVA/Makefile
       # The false in the gsub! call makes homebrew not throw an error if there
       # is no line naming the perl executable in the script files (which is they
       # case for some scripts).
-      s.gsub!(/^#!.*perl/, "#!#{which_perl}/perl", false)
+      s.gsub!(/^#!.*perl/, "#!#{which_perl}/perl", audit_result: false)
     end
 
     # on some systems the permissions were incorrect after the patch
