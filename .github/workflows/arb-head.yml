@@ -10,7 +10,7 @@ jobs:
     name: Build head version of ARB
     strategy:
       matrix:
-        os: [macos-12]
+        os: [macos-13]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -29,7 +29,7 @@ jobs:
         HOMEBREW_LOGS: .homebrew-logs
       run: brew install arb-project/arb/arb --HEAD
     - name: save Homebrew logs
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: Homebrew logs
