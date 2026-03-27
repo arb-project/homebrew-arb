@@ -10,12 +10,12 @@ jobs:
     name: Run tests for head version of ARB
     strategy:
       matrix:
-        os: [macos-13]
+        os: [macos-15-intel, macos-26-intel]
     runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v6
     - name: add tap from current branch
       run: |
         mkdir -p $(dirname $(brew --repo arb-project/arb))
@@ -29,7 +29,7 @@ jobs:
         HOMEBREW_LOGS: ${{github.workspace}}/.homebrew-logs
       run: brew install arb-project/arb/arb --HEAD --with-test-only --keep-tmp
     - name: save Homebrew logs
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       if: always()
       with:
         name: Homebrew logs

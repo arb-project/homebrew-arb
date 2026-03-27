@@ -1,9 +1,12 @@
 name: ARB Production
 
+# Current production version does not build on recent macOS versions. Disable workflow.
 on:
   push:
-  schedule:
-    - cron: "0 0 * * 1"
+    branches-ignore:
+      - **
+#  schedule:
+#    - cron: "0 0 * * 1"
 
 jobs:
   build:

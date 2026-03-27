@@ -1,7 +1,5 @@
 # homebrew-arb
 
-![ARB 7](https://github.com/arb-project/homebrew-arb/workflows/ARB%207/badge.svg)
-![ARB Production version](https://github.com/arb-project/homebrew-arb/workflows/ARB%20Production/badge.svg)
 ![ARB head version](https://github.com/arb-project/homebrew-arb/workflows/ARB%20head/badge.svg)
 
 Homebrew tap for formulae to build [ARB](http://www.arb-home.de) and related
