@@ -34,3 +34,5 @@ jobs:
       with:
         name: Homebrew logs
         path: /tmp/.homebrew-logs/
+        include-hidden-files: true
+        archive: true
