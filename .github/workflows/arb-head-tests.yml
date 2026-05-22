@@ -26,11 +26,11 @@ jobs:
       run: brew install arb-project/arb/arb --HEAD --only-dependencies
     - name: build HEAD version of ARB
       env:
-        HOMEBREW_LOGS: ${{github.workspace}}/.homebrew-logs
+        HOMEBREW_LOGS: /tmp/.homebrew-logs
       run: brew install arb-project/arb/arb --HEAD --with-test-only --keep-tmp
     - name: save Homebrew logs
       uses: actions/upload-artifact@v6
       if: always()
       with:
         name: Homebrew logs
-        path: .homebrew-logs/
+        path: /tmp/.homebrew-logs/
