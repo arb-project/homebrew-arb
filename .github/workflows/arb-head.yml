@@ -30,7 +30,8 @@ jobs:
       run: brew install arb-project/arb/arb --HEAD
     - name: save Homebrew logs
       uses: actions/upload-artifact@v6
-      if: failure()
+      if: always()
       with:
         name: Homebrew logs
         path: /tmp/.homebrew-logs/
+        include-hidden-files: true
