@@ -20,6 +20,8 @@ jobs:
       run: |
         mkdir -p $(dirname $(brew --repo arb-project/arb))
         ln -s $PWD $(brew --repo arb-project/arb)
+    - name: trust our tap
+      run: brew trust arb-project/arb
     - name: install X11 server
       run: brew install --cask xquartz
     - name: install other ARB dependencies
