@@ -1,10 +1,10 @@
-name: ARB head with tests
+name: ARB testversion without tests
 
 on: workflow_dispatch
 
 jobs:
   build:
-    name: Run tests for testing version of ARB
+    name: Build testing version of ARB
     strategy:
       matrix:
         os: [macos-26-intel]
