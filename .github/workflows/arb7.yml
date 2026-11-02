@@ -2,11 +2,12 @@ name: ARB 7
 
 # Current release version does not build on recent macOS versions. Disable workflow.
 on:
-  push:
-    branches-ignore:
-      - **
-  schedule:
-    - cron: "0 0 * * 1"
+  # Disabled as the release version of ARB 7 does not build on recent macOS versions.
+  # push:
+  # schedule:
+  #  - cron: "0 0 * * 1"
+  workflow_dispatch:
+
 
 jobs:
   build:
