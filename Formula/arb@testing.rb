@@ -1,17 +1,10 @@
-class Arb < Formula
+class ArbATTesting < Formula
   desc "Graphical DNA, RNA and amino acid sequence analysis tool - production version"
   homepage "http://www.arb-home.de"
 
-  # ARB production version
-  stable do
-    url "http://download.arb-home.de/production/2022_09_08/arb-r19270-source.tgz"
-    sha256 "616bc04c9de1e4e9d8f633995b26e03e3ea5462308a9383de18b226f8de9fde8"
-    version "7.1-beta_r19270"
-  end
-
   # ARB development version
   head do
-     url "http://vc.arb-home.de/readonly/trunk", :using => :svn
+     url "http://vc.arb-home.de/readonly/branches/testversion/", :using => :svn
   end
 
   ##############################################################################
