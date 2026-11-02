@@ -1,4 +1,4 @@
-name: ARB head with tests
+name: ARB testverion with tests
 
 on: workflow_dispatch
 
