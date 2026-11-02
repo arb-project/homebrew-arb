@@ -1,4 +1,4 @@
-class ArbATTesting < Formula
+class ArbTesting < Formula
   desc "Graphical DNA, RNA and amino acid sequence analysis tool - production version"
   homepage "http://www.arb-home.de"
 
@@ -6,6 +6,8 @@ class ArbATTesting < Formula
   head do
      url "http://vc.arb-home.de/readonly/branches/testversion/", :using => :svn
   end
+
+  keg_only "ARB testing version. This formula is intended for ARB developers and testers only. It is not intended for end-users. If you are an end-user, please install the HEAD version of ARB via the arb formula."
 
   ##############################################################################
   ### OPTIONS                                                                ###
